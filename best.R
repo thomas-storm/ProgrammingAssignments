@@ -14,17 +14,17 @@ best <- function(state, outcome){
         }
         outcome.df <- subset(outcome.df, State == state)
         if(outcome == outcome.list[1]){
-                outcome.df <- outcome.df[order(outcome.df[,11], outcome.df[,2]),]
+                outcome.df <- outcome.df[order(suppressWarnings(as.numeric(outcome.df[,11])), outcome.df[,2]),]
                 rownames(outcome.df) <- NULL
                 best.hospital <- outcome.df[1,2]
         }
         if(outcome == outcome.list[2]){
-                outcome.df <- outcome.df[order(outcome.df[,17], outcome.df[,2]),]
+                outcome.df <- outcome.df[order(suppressWarnings(as.numeric(outcome.df[,17])), outcome.df[,2]),]
                 rownames(outcome.df) <- NULL
                 best.hospital <- outcome.df[1,2]
         }
         if(outcome == outcome.list[3]){
-                outcome.df <- outcome.df[order(outcome.df[,23], outcome.df[,2]),]
+                outcome.df <- outcome.df[order(suppressWarnings(as.numeric(outcome.df[,23])), outcome.df[,2]),]
                 rownames(outcome.df) <- NULL
                 best.hospital <- outcome.df[1,2]
         }
