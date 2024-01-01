@@ -26,6 +26,12 @@ rankhospital <- function(state, outcome, num = "best") {
                 outcome.col <- 23
         }
         
+        outcome.df <- outcome.df[order(suppressWarnings(as.numeric(outcome.df[,outcome.col])), outcome.df[,2]),]
+        
+        outcome.df[,outcome.col] <- suppressWarnings(as.numeric(outcome.df[, outcome.col]))
+        
+        outcome.df <- na.omit(outcome.df)
+        
         outcome.row <- list("best", "worst", 1:nrow(outcome.df))
         
         if(sum(sapply(outcome.row, FUN=function(X) num %in% X)) == 1){
@@ -40,7 +46,7 @@ rankhospital <- function(state, outcome, num = "best") {
                         outcome.rank <- num
                 }
         
-        outcome.df <- outcome.df[order(suppressWarnings(as.numeric(outcome.df[,outcome.col])), outcome.df[,2]),]
+        
         rownames(outcome.df) <- NULL
         rank.hospital <- outcome.df[outcome.rank,2]
         }
