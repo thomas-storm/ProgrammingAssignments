@@ -11,11 +11,11 @@ rankall <- function(outcome, num = "best") {
         
         outcome.df <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
         
-        state.list <- levels(as.factor(outcome.df[, 7]))
+        state <- levels(as.factor(outcome.df[, 7]))
         
         i <- 1
         
-        rank.hospital.state <- numeric(length = length(state.list))
+        hospital <- numeric(length = length(state))
         
         outcome.list <- c("heart attack", "heart failure", "pneumonia")
         
@@ -32,9 +32,9 @@ rankall <- function(outcome, num = "best") {
                 outcome.col <- 23
         }
         
-        for (state in state.list){
+        for (state.x in state){
               
-                outcome.loop <- subset(outcome.df, State == state)
+                outcome.loop <- subset(outcome.df, State == state.x)
                 
                 outcome.loop <- outcome.loop[order(suppressWarnings(as.numeric(outcome.loop[,outcome.col])), outcome.loop[,2]),]
                 
@@ -62,10 +62,10 @@ rankall <- function(outcome, num = "best") {
                 if(sum(sapply(outcome.row, FUN=function(X) num %in% X)) == 0){
                         rank.hospital <- NA
                 }
-                rank.hospital.state[i] <- rank.hospital
+                hospital[i] <- rank.hospital
                 i <- i + 1
         }
-        rank.df <- data.frame(rank.hospital.state, state.list)
-        row.names(rank.df) <- state.list
+        rank.df <- data.frame(hospital, state)
+        row.names(rank.df) <- state
         rank.df
 }
