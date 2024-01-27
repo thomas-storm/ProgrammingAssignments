@@ -7,4 +7,4 @@ num.char.in.page <- function(x1 = 10, x2 = 20, x3 = 30, x4 = 100){
                 num.char[i] <- nchar(spl.1[spl.1$xx == counter[i], 2])
         }
         num.char
-}
+}1
